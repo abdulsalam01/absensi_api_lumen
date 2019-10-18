@@ -25,7 +25,8 @@ class DetilJadwalController extends Controller
         'npm' => $request->input('npm'),
         'kode_mk' => $request->input('kode_mk'),
         'hari' => $request->input('hari'),
-        'jam' => $request->input('jam')
+        'jam' => $request->input('jam'),
+        'ruang' => $request->input('ruang')
       );
 
       return $this->detil->create($data);
@@ -36,7 +37,8 @@ class DetilJadwalController extends Controller
         'npm' => $request->input('npm'),
         'kode_mk' => $request->input('kode_mk'),
         'hari' => $request->input('hari'),
-        'jam' => $request->input('jam')
+        'jam' => $request->input('jam'),
+        'ruang' => $request->input('ruang')        
       );
 
       return $this->detil->update($data, $id);

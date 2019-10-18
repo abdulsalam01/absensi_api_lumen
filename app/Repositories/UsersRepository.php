@@ -14,6 +14,12 @@
             $this->message = new Messages();
         }
 
+        public function counts() {
+            $mahasiswa = new Mahasiswa();
+
+            return $mahasiswa->count();
+        }
+
         public function login($data) {
             $mahasiswa = new Mahasiswa();
             //

@@ -25,5 +25,9 @@ class ExtendableServiceProvider extends ServiceProvider
         $this->app->when('App\Http\MataKuliahController')
                 ->needs('App\Interfaces\GlobalInterface')
                 ->give('App\Repositories\MataKuliahRepository');
+
+        $this->app->when('App\Http\RekapKehadiranController')
+                ->needs('App\Interfaces\GlobalInterface')
+                ->give('App\Repositories\RekapKehadiranRepository');
     }
 }

@@ -23,6 +23,7 @@ class MataKuliahController extends Controller
     public function insert(Request $request) {
       $data = array(
         'mata_kuliah' => $request->input('mata_kuliah'),
+        'sks' => $request->input('sks'),
         'keterangan' => $request->input('keterangan'));
 
       return $this->matkul->create($data);
@@ -31,9 +32,10 @@ class MataKuliahController extends Controller
     public function update(Request $request, $id) {
       $data = array(
         'mata_kuliah' => $request->input('mata_kuliah'),
+        'sks' => $request->input('sks'),        
         'keterangan' => $request->input('keterangan'));
 
-      return $this->matkul->update($data, $id);      
+      return $this->matkul->update($data, $id);
     }
 
     public function delete($id) {

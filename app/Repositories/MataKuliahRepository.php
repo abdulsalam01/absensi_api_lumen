@@ -14,10 +14,17 @@
             $this->message = new Messages();
         }
 
+        public function counts() {
+            $mata_kuliah = new MataKuliah();
+
+            return $mata_kuliah->count();
+        }
+
         public function create($data) {
             $mata_kuliah = new MataKuliah();
 
             $mata_kuliah->mata_kuliah = $data['mata_kuliah'];
+            $mata_kuliah->sks = $data['sks'];
             $mata_kuliah->keterangan = $data['keterangan'];
 
             $mata_kuliah->save();
@@ -43,6 +50,7 @@
             $mata_kuliah = $mata_kuliah->find($id);
 
             $mata_kuliah->mata_kuliah = $data['mata_kuliah'];
+            $mata_kuliah->sks = $data['sks'];
             $mata_kuliah->keterangan = $data['keterangan'];
 
             $mata_kuliah->save();

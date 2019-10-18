@@ -13,7 +13,7 @@ class JadwalDetil extends Model
     protected $table = 'detil_jadwal';
     protected $primaryKey = 'kd_detil';
     //
-    protected $fillable = ['kd_detil', 'npm', 'kode_mk', 'hari', 'jam'];
+    protected $fillable = ['kd_detil', 'npm', 'kode_mk', 'hari', 'jam', 'ruang'];
     protected $hidden = [];
 
     public function users() {
@@ -22,5 +22,9 @@ class JadwalDetil extends Model
 
     public function matkul() {
       return $this->belongsTo('App\MataKuliah', 'kode_mk', 'kode_mk');
+    }
+
+    public function kehadiran() {
+      return $this->hasMany('App\RekapKehadiran', 'kd_detil', 'kd_detil');
     }
 }

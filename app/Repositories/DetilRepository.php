@@ -30,6 +30,7 @@
             $detil->kode_mk = $data['kode_mk'];
             $detil->hari = $data['hari'];
             $detil->jam = $data['jam'];
+            $detil->ruang = $data['ruang'];
 
             $detil->save();
             return response()->json($this->message->afterInsert());
@@ -74,7 +75,8 @@
             $detil->kode_mk = $data['kode_mk'];
             $detil->hari = $data['hari'];
             $detil->jam = $data['jam'];
-
+            $detil->ruang = $data['ruang'];
+            
             $detil->save();
             return response()->json($this->message->afterUpdate());
         }

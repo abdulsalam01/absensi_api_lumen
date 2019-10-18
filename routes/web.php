@@ -57,4 +57,17 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
     // delete
     $router->delete('remove/{id}', 'DetilJadwalController@delete');
   });
+
+  // rekap api
+  $router->group(['prefix' => 'rekap_kehadiran'], function() use ($router) {
+    // get
+    $router->get('all', 'RekapKehadiranController@getAll');
+    $router->get('all/{id}/{date}', 'RekapKehadiranController@getById');
+    // post
+    $router->post('create', 'RekapKehadiranController@insert');
+    // put
+    $router->put('modify/{id}/{date}', 'RekapKehadiranController@update');
+    // delete
+    $router->delete('remove/{id}/{date}', 'RekapKehadiranController@delete');
+  });
 });

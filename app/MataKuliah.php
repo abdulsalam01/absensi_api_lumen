@@ -13,7 +13,7 @@ class MataKuliah extends Model
     protected $primaryKey = 'kode_mk';
 
     //
-    protected $fillable = ['kode_mk', 'mata_kuliah', 'keterangan'];
+    protected $fillable = ['kode_mk', 'mata_kuliah', 'sks', 'keterangan'];
     protected $hidden = [];
 
     public function detailJadwal() {
