@@ -15,10 +15,13 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
+// API
 $router->group(['prefix' => env('prefix')], function() use ($router) {
   // mahasiswa api
   $router->group(['prefix' => 'mahasiswa'], function() use($router) {
     // get
+    $router->get('/count', 'UsersController@counter');
+    //
     $router->get('all', 'UsersController@getAll');
     $router->get('all/{id}', 'UsersController@getById');
     // post
@@ -33,6 +36,8 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
   // mata_kuliah api
   $router->group(['prefix' => 'mata_kuliah'], function() use ($router) {
     // get
+    $router->get('/count', 'MataKuliahController@counter');
+    //
     $router->get('all', 'MataKuliahController@getAll');
     $router->get('all/{id}', 'MataKuliahController@getById');
     // post
@@ -46,6 +51,8 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
   // detil_jadwal api
   $router->group(['prefix' => 'detil_jadwal'], function() use ($router) {
     // get
+    $router->get('/count', 'MataKuliahController@counter');
+    //
     $router->get('all', 'DetilJadwalController@getAll');
     $router->get('all/{id}', 'DetilJadwalController@getById');
     $router->get('user_schedule/{id}', 'DetilJadwalController@getByUser');
@@ -61,8 +68,11 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
   // rekap api
   $router->group(['prefix' => 'rekap_kehadiran'], function() use ($router) {
     // get
+    $router->get('/count', 'RekapKehadiranController@counter');
+    //
     $router->get('all', 'RekapKehadiranController@getAll');
     $router->get('all/{id}/{date}', 'RekapKehadiranController@getById');
+    $router->get('presence/{id}', 'RekapKehadiranController@getByUser');
     // post
     $router->post('create', 'RekapKehadiranController@insert');
     // put
@@ -70,4 +80,15 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
     // delete
     $router->delete('remove/{id}/{date}', 'RekapKehadiranController@delete');
   });
+});
+
+
+// WEB ROUTE
+$router->group(['prefix' => 'admin'], function() use($router) {
+  $router->get('/', 'AdminController@index');
+  //
+  $router->get('/mahasiswa/all', ['as' => 'mhs', 'uses' => 'AdminController@showMahasiswa']);
+  $router->get('/matakuliah/all', ['as' => 'mk', 'uses' => 'AdminController@showMataKuliah']);
+  $router->get('/detail_jadwal/all', ['as' => 'detil', 'uses' => 'AdminController@showDetailJadwal']);
+  $router->get('/rekap_kehadiran/all', ['as' => 'rekap', 'uses' => 'AdminController@showRekapKehadiran']);
 });

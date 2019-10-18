@@ -20,6 +20,10 @@ class RekapKehadiranController extends Controller
         $this->rekap = $interface;
     }
 
+    public function counter() {
+        return $this->rekap->counts();
+    }
+
     public function insert(Request $request) {
       $data = array(
         'kd_detil' => $request->input('kd_detil'),
@@ -54,5 +58,9 @@ class RekapKehadiranController extends Controller
         $data = ['kode' => $id, 'tanggal' => $date];
 
         return $this->rekap->readById($data);
+    }
+
+    public function getByUser($id) {
+      return $this->rekap->readByUser($id);
     }
 }

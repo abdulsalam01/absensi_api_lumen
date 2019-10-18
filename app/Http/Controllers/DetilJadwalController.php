@@ -20,6 +20,10 @@ class DetilJadwalController extends Controller
         $this->detil = $interface;
     }
 
+    public function counter() {
+        return $this->detil->counts();
+    }
+
     public function insert(Request $request) {
       $data = array(
         'npm' => $request->input('npm'),
@@ -38,7 +42,7 @@ class DetilJadwalController extends Controller
         'kode_mk' => $request->input('kode_mk'),
         'hari' => $request->input('hari'),
         'jam' => $request->input('jam'),
-        'ruang' => $request->input('ruang')        
+        'ruang' => $request->input('ruang')
       );
 
       return $this->detil->update($data, $id);

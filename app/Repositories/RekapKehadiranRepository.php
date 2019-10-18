@@ -33,8 +33,10 @@
 
         public function read() {
             $rekap = new RekapKehadiran();
-            // 
-            $queryAll = $rekap::with('detail')->get();
+            //
+            $queryAll = $rekap::with(['detail' => function($query) {
+              $query->with('users')->with('matkul');
+            }])->get();
 
             return response()->json($queryAll);
         }
@@ -42,9 +44,21 @@
         public function readById($id) {
             $rekap = new RekapKehadiran();
 
-            $queryAll = $rekap::with('detail')
-                  ->where('kd_detil', $id['kode'])
-                  ->whereDate('tanggal', $id['tanggal'])->get();
+            $queryAll = $rekap::with(['detail' => function($query) {
+              $query->with(['users', 'matkul']);
+            }])->where('kd_detil', $id['kode'])
+               ->whereDate('tanggal', $id['tanggal'])->get();
+
+            //
+            return response()->json($queryAll);
+        }
+
+        public function readByUser($id) {
+            $rekap = new RekapKehadiran();
+
+            $queryAll = $rekap::with(['detail' => function($query) use($id) {
+              $query->with(['users', 'matkul'])->where('npm', '=', $id);
+            }])->get();
             //
             return response()->json($queryAll);
         }

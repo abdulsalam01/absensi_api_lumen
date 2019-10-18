@@ -23,4 +23,9 @@ class Messages
     return array('message' => 'Login Gagal', 'status' => false);
   }
 
+  public function status($code) {
+      $status = ['Tidak hadir', 'Hadir', 'Izin', 'Sakit'];
+
+      return $status[$code];
+  }
 }

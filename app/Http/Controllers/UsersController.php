@@ -20,6 +20,10 @@ class UsersController extends Controller
       $this->user = $interface;
     }
 
+    public function counter() {
+        return $this->user->counts();
+    }
+
     public function auth(Request $request) {
       $data = array(
         'npm' => $request->input('npm'),

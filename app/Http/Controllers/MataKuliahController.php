@@ -20,6 +20,10 @@ class MataKuliahController extends Controller
       $this->matkul = $interface;
     }
 
+    public function counter() {
+        return $this->matkul->counts();
+    }
+
     public function insert(Request $request) {
       $data = array(
         'mata_kuliah' => $request->input('mata_kuliah'),
@@ -32,7 +36,7 @@ class MataKuliahController extends Controller
     public function update(Request $request, $id) {
       $data = array(
         'mata_kuliah' => $request->input('mata_kuliah'),
-        'sks' => $request->input('sks'),        
+        'sks' => $request->input('sks'),
         'keterangan' => $request->input('keterangan'));
 
       return $this->matkul->update($data, $id);
