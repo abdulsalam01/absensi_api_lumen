@@ -88,7 +88,14 @@ $router->group(['prefix' => 'admin'], function() use($router) {
   $router->get('/', 'AdminController@index');
   //
   $router->get('/mahasiswa/all', ['as' => 'mhs', 'uses' => 'AdminController@showMahasiswa']);
-  $router->get('/matakuliah/all', ['as' => 'mk', 'uses' => 'AdminController@showMataKuliah']);
-  $router->get('/detail_jadwal/all', ['as' => 'detil', 'uses' => 'AdminController@showDetailJadwal']);
+  $router->get('/mahasiswa/create', ['as' => 'mhs_c', 'uses' => 'AdminController@createMahasiswa']);
+  //
+  $router->get('/mata_kuliah/all', ['as' => 'mk', 'uses' => 'AdminController@showMataKuliah']);
+  $router->get('/mata_kuliah/create', ['as' => 'mk_c', 'uses' => 'AdminController@createMataKuliah']);
+  //
+  $router->get('/detil_jadwal/all', ['as' => 'detil', 'uses' => 'AdminController@showDetailJadwal']);
+  $router->get('/detil_jadwal/create', ['as' => 'detil_c', 'uses' => 'AdminController@createDetilJadwal']);
+  //
   $router->get('/rekap_kehadiran/all', ['as' => 'rekap', 'uses' => 'AdminController@showRekapKehadiran']);
+  $router->get('/rekap_kehadiran/create', ['as' => 'rekap_c', 'uses' => 'AdminController@createRekapKehadiran']);
 });

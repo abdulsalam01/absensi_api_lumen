@@ -40,7 +40,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="data in all_data[2]">
+                    <tr v-for="(data, index) in all_data[2]">
                       <td>@{{data.kd_detil}}</td>
                       <td>@{{data.npm}}</td>
                       <td>@{{data.kode_mk}}</td>
@@ -48,8 +48,16 @@
                       <td>@{{data.jam}}</td>
                       <td>@{{data.ruang}}</td>
                       <td>
-                        <a v-bind:href="data.kd_detil">Edit</a>|
-                        <a v-bind:href="data.kd_detil">Delete</a>
+                        <a v-on:click="_showFunc('detilModal', 2, index)">
+                          <button type="button" class="btn btn-warning btn-circle">
+                            <i class="fas fa-pencil-ruler"></i>
+                          </button>
+                        </a>
+                        <a v-on:click="_showFunc('detilDel', 2, index)">
+                          <button type="button" class="btn btn-danger btn-circle">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                   </tbody>
@@ -63,6 +71,88 @@
 
       </div>
       <!-- End of Main Content -->
+
+      <!-- detil_jadwal modal delete -->
+      <div class="modal fade" id="detilDel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Anda yakin?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" v-on:click="_deleteFunc(result.kd_detil, urls[2])">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- detil modal -->
+      <div class="modal fade" id="detilModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ubah Detil Jadwal</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Mahasiswa:</label>
+                  <input list="mahasiswa" class="form-control" :value="result.users.npm" v-model="result.users.npm" />
+                  <small>@{{result.users.nama}}</small>
+
+                  <!-- list of mahasiswa -->
+                  <datalist id="mahasiswa">
+                    <option v-for="(data, index) in all_data[0]" :value="data.npm">@{{data.npm+" - "+data.nama}}</option>
+                  </datalist>
+                </div>
+                <div class="form-group">
+                  <label for="matkul-text" class="col-form-label">Mata Kuliah:</label>
+                  <input list="matkul" class="form-control" :value="result.kode_mk" v-model="result.kode_mk" />
+
+                  <!-- list of mata_kuliah -->
+                  <datalist id="matkul">
+                    <option v-for="(data, index) in all_data[1]" :value="data.kode_mk">@{{data.mata_kuliah}}</option>
+                  </datalist>
+                </div>
+                <div class="form-group">
+                  <label for="day-text" class="col-form-label">Hari:</label>
+                  <select :value="result.hari" v-model="result.hari" class="form-control">
+                    <option>Senin</option>
+                    <option>Selasa</option>
+                    <option>Rabu</option>
+                    <option>Kamis</option>
+                    <option>Jumat</option>
+                    <option>Sabtu</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="jam-text" class="col-form-label">Jam Masuk:</label>
+                  <input type="time" class="form-control" :value="result.jam" v-model="result.jam"/>
+                </div>
+                <div class="form-group">
+                  <label for="ruang-text" class="col-form-label">Ruang Masuk:</label>
+                  <input type="text" class="form-control" :value="result.ruang" v-model="result.ruang"/>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary"
+                      v-on:click="_updateFunc(result.kd_detil, urls[2],
+                              {'npm': result.users.npm, 'kode_mk': result.kode_mk, 'hari': result.hari,
+                              'jam': result.jam, 'ruang': result.ruang})">Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <!-- footer -->
 @include('admin.partials.footer')

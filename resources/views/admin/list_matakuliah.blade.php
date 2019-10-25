@@ -38,14 +38,22 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="data in all_data[1]">
+                    <tr v-for="(data, index) in all_data[1]">
                       <td>@{{'#COD' + data.kode_mk}}</td>
                       <td>@{{data.mata_kuliah}}</td>
                       <td>@{{data.sks}}</td>
                       <td>@{{data.keterangan}}</td>
                       <td>
-                        <a v-bind:href="data.kode_mk">Edit</a>|
-                        <a v-bind:href="data.kode_mk">Delete</a>
+                        <a v-on:click="_showFunc('mkModal', 1, index)">
+                          <button type="button" class="btn btn-warning btn-circle">
+                            <i class="fas fa-pencil-ruler"></i>
+                          </button>
+                        </a>
+                        <a v-on:click="_showFunc('mkDel', 1, index)">
+                          <button type="button" class="btn btn-danger btn-circle">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                   </tbody>
@@ -59,6 +67,62 @@
 
       </div>
       <!-- End of Main Content -->
+
+      <!-- mata kuliah modal delete -->
+      <div class="modal fade" id="mkDel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Anda yakin?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" v-on:click="_deleteFunc(result.kode_mk, urls[1])">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- mata kuliah modal -->
+      <div class="modal fade" id="mkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ubah Mata Kuliah</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="mk" class="col-form-label">Mata Kuliah:</label>
+                  <input type="text" class="form-control" v-bind:value="result.mata_kuliah" v-model="result.mata_kuliah" />
+                </div>
+                <div class="form-group">
+                  <label for="sks-text" class="col-form-label">Jumlah SKS:</label>
+                  <input type="number" min="0" class="form-control" v-bind:value="result.sks" v-model="result.sks" />
+                </div>
+                <div class="form-group">
+                  <label for="note-text" class="col-form-label">Keterangan:</label>
+                  <textarea class="form-control" v-model="result.keterangan">@{{result.keterangan}}</textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary"
+                      v-on:click="_updateFunc(result.kode_mk, urls[1],
+                              {'mata_kuliah': result.mata_kuliah, 'sks': result.sks,
+                              'keterangan': result.keterangan})">Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <!-- footer -->
 @include('admin.partials.footer')

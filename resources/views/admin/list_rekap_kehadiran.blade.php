@@ -17,7 +17,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Mata Kuliah</h1>
+          <h1 class="h3 mb-2 text-gray-800">Rekap Kehadiran</h1>
           <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
           <!-- DataTales Example -->
@@ -37,13 +37,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr v-for="data in all_data[3]">
+                    <tr v-for="(data, index) in all_data[3]">
                       <td>@{{data.kd_detil}}</td>
                       <td>@{{data.hadir}}</td>
                       <td>@{{data.tanggal}}</td>
                       <td>
-                        <a v-bind:href="data.kd_detil">Edit</a>|
-                        <a v-bind:href="data.kd_detil">Delete</a>
+                        <a v-on:click="_showFunc('rkModal', 3, index)">
+                          <button type="button" class="btn btn-warning btn-circle">
+                            <i class="fas fa-pencil-ruler"></i>
+                          </button>
+                        </a>
+                        <a v-on:click="_showFunc('rkDel', 3, index)">
+                          <button type="button" class="btn btn-danger btn-circle">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                   </tbody>
@@ -57,6 +65,63 @@
 
       </div>
       <!-- End of Main Content -->
+
+      <!-- rekap_kehadiran modal delete -->
+      <div class="modal fade" id="rkDel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Anda yakin?</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" v-on:click="_deleteFunc([result.kd_detil, result.tanggal], urls[3])">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- rekap_kehadiran modal -->
+      <div class="modal fade" id="rkModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ubah Rekap Kehadiran</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-group">
+                  <label for="name" class="col-form-label">Kode Detil:</label>
+                  <select class="form-control" :value="result.kd_detil" v-model="result.kd_detil">
+                    <option v-for="(data, index) in all_data[2]" :value="data.kd_detil">
+                      @{{data.npm + ' # ' + data.hari + '-' + data.jam + ' # ' + data.ruang}}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="status-text" class="col-form-label">Status Kehadiran:</label>
+                  <select class="form-control" :value="result.hadir" v-model="result.hadir">
+                    <option v-for="(stats, index) in status" :value="index">@{{stats}}</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary"
+                      v-on:click="_updateFunc([result.kd_detil, result.tanggal], urls[3],
+                              {'kd_detil': result.kd_detil, 'hadir': result.hadir})">Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 <!-- footer -->
 @include('admin.partials.footer')

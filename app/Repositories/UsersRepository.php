@@ -5,6 +5,8 @@
     use App\Mahasiswa;
     // message helper
     use App\Messages;
+    // encrypt decrypt helper
+    use Illuminate\Support\Facades\Crypt;
 
     class UsersRepository implements GlobalInterface {
         //
@@ -34,7 +36,7 @@
             $mahasiswa->nama = $data['nama'];
             $mahasiswa->alamat = $data['alamat'];
             $mahasiswa->tgllahir = $data['tgllahir'];
-            $mahasiswa->sandi = $data['sandi'];
+            $mahasiswa->sandi = Crypt::encrypt($data['sandi']);
             $mahasiswa->email_orangtua = $data['email'];
 
             $mahasiswa->save();
@@ -61,7 +63,7 @@
             $mahasiswa->nama = $data['nama'];
             $mahasiswa->alamat = $data['alamat'];
             $mahasiswa->tgllahir = $data['tgllahir'];
-            $mahasiswa->sandi = $data['sandi'];
+            $mahasiswa->sandi = Crypt::encrypt($data['sandi']);
             $mahasiswa->email_orangtua = $data['email'];
 
             $mahasiswa->save();

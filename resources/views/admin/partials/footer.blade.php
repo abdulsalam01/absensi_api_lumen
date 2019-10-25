@@ -63,7 +63,7 @@
 <script src="{{ url('js/demo/chart-bar-demo.js') }}"></script>
 
 <!-- include core vue js file -->
-@include('admin.partials.core')
+@include('admin.cores.core')
 
 </body>
 </html>

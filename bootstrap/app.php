@@ -76,13 +76,14 @@ $app->singleton(
 |
 */
 
-// $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
-// $app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\EventServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 
 // add costum provider
 $app->register(App\Providers\ExtendableServiceProvider::class);
-
+// mail provider
+$app->register(Illuminate\Mail\MailServiceProvider::class);
 /*
 |--------------------------------------------------------------------------
 | Load The Application Routes
@@ -93,6 +94,13 @@ $app->register(App\Providers\ExtendableServiceProvider::class);
 | can respond to, as well as the controllers that may handle them.
 |
 */
+
+/* CONFIGURE EMAIL*/
+$app->configure('mail');
+$app->alias('mailer', Illuminate\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\Mailer::class);
+$app->alias('mailer', Illuminate\Contracts\Mail\MailQueue::class);
+/* END CONFIGURE*/
 
 $app->router->group([
     'namespace' => 'App\Http\Controllers',

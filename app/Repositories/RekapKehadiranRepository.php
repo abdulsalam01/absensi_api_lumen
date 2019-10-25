@@ -38,7 +38,10 @@
               $query->with('users')->with('matkul');
             }])->get();
 
-            return response()->json($queryAll);
+            // convert to code of kehadiran
+            $status = $this->getStatus($queryAll);
+            //
+            return response()->json($status);
         }
 
         public function readById($id) {
@@ -49,8 +52,9 @@
             }])->where('kd_detil', $id['kode'])
                ->whereDate('tanggal', $id['tanggal'])->get();
 
+            $status = $this->getStatus($queryAll);
             //
-            return response()->json($queryAll);
+            return response()->json($status);
         }
 
         public function readByUser($id) {
@@ -59,8 +63,10 @@
             $queryAll = $rekap::with(['detail' => function($query) use($id) {
               $query->with(['users', 'matkul'])->where('npm', '=', $id);
             }])->get();
+
+            $status = $this->getStatus($queryAll);
             //
-            return response()->json($queryAll);
+            return response()->json($status);
         }
 
         public function update($data, $id) {
@@ -88,6 +94,15 @@
 
             //
             return response()->json($this->message->afterDelete());
+        }
+
+        // keep status in array of message
+        public function getStatus($arr) {
+            foreach ($arr as $value) {
+              $value->hadir = $this->message->status($value->hadir);
+            }
+
+            return $arr;
         }
     }
 

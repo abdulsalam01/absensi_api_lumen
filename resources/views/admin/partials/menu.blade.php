@@ -7,7 +7,7 @@
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+    <div class="sidebar-brand-text mx-3">Absensi <sup>Admin</sup></div>
   </a>
 
   <!-- Divider -->
@@ -38,7 +38,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
         <a class="collapse-item" href="{{ route('mhs') }}">Manipulasi</a>
-        <a class="collapse-item" href="cards.html">Tambah</a>
+        <a class="collapse-item" href="{{ route('mhs_c') }}">Tambah</a>
       </div>
     </div>
   </li>
@@ -53,7 +53,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
         <a class="collapse-item" href="{{ route('mk') }}">Manipulasi</a>
-        <a class="collapse-item" href="utilities-border.html">Tambah</a>
+        <a class="collapse-item" href="{{ route('mk_c') }}">Tambah</a>
       </div>
     </div>
   </li>
@@ -76,7 +76,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
         <a class="collapse-item" href="{{ route('detil') }}">Manipulasi</a>
-        <a class="collapse-item" href="login.html">Tambah</a>
+        <a class="collapse-item" href="{{ route('detil_c') }}">Tambah</a>
       </div>
     </div>
   </li>
@@ -91,7 +91,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
         <a class="collapse-item" href="{{ route('rekap') }}">Manipulasi</a>
-        <a class="collapse-item" href="login.html">Tambah</a>
+        <a class="collapse-item" href="{{ route('rekap_c') }}">Tambah</a>
       </div>
     </div>
   </li>

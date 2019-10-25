@@ -23,9 +23,11 @@ class Messages
     return array('message' => 'Login Gagal', 'status' => false);
   }
 
-  public function status($code) {
-      $status = ['Tidak hadir', 'Hadir', 'Izin', 'Sakit'];
-
+  public function status($code = NULL) {
+      $status = ["Tidak hadir", "Hadir", "Izin", "Sakit"];
+      //
+      if(is_null($code)) return $status;
+      // if have specific code
       return $status[$code];
   }
 }
