@@ -31,7 +31,7 @@
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-      <i class="fas fa-fw fa-cog"></i>
+      <i class="fas fa-fw fa-user"></i>
       <span>Mahasiswa</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -46,7 +46,7 @@
   <!-- Nav Item - Utilities Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-      <i class="fas fa-fw fa-wrench"></i>
+      <i class="fas fa-fw fa-book"></i>
       <span>Mata Kuliah</span>
     </a>
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -84,7 +84,7 @@
   <!-- Nav Item - Charts -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePagesX" aria-expanded="true" aria-controls="collapsePages">
-      <i class="fas fa-fw fa-folder"></i>
+      <i class="fas fa-fw fa-eye"></i>
       <span>Rekap Kehadiran</span>
     </a>
     <div id="collapsePagesX" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">

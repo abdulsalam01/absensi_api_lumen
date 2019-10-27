@@ -14,6 +14,8 @@
       result: { users: {}, detail: { users: {}, matkul: {} }, },
       // status of presence/absence
       status: [],
+      // keep value of inserted data
+      datas: {},
     },
     methods: {
       _deleteFunc: function(id, req) {
@@ -49,7 +51,6 @@
         $(`#${code}`).modal()
         //
         this.result = this.all_data[idx][id];
-        console.log(this.result)
       }
     },
     mounted () {

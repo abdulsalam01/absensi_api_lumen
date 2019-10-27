@@ -30,4 +30,14 @@ class Messages
       // if have specific code
       return $status[$code];
   }
+
+  public function getMessage($data) {
+    $message = "Selamat Siang
+    Berikut rekap kehadiran atas data:
+    NPM: " .$data->detail->users->npm. "
+    Nama: " .$data->detail->users->nama. "
+    Status Kehadiran: " .$data->hadir;
+
+    return $message;
+  }
 }

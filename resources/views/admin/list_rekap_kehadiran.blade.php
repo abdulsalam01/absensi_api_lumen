@@ -52,6 +52,11 @@
                             <i class="fas fa-trash"></i>
                           </button>
                         </a>
+                        <a v-on:click="">
+                          <button type="button" class="btn btn-success btn-circle">
+                            <i class="fas fa-mail-bulk"></i>
+                          </button>
+                        </a>
                       </td>
                     </tr>
                   </tbody>

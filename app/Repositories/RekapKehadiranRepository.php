@@ -5,6 +5,10 @@
     use App\RekapKehadiran;
     // message helper
     use App\Messages;
+    // mail helper
+    use Illuminate\Support\Facades\Mail;
+    // date helper
+    use Carbon\Carbon;
 
     class RekapKehadiranRepository implements GlobalInterface {
         //
@@ -25,9 +29,15 @@
 
             $rekap->kd_detil = $data['kd_detil'];
             $rekap->hadir = $data['hadir'];
-            // tanggal is timestamp
+            $rekap->tanggal = Carbon::now();
 
             $rekap->save();
+
+            // get data detail of rekap by previous inserted data
+            $query = $this->readById(['kode' => $rekap->kd_detil, 'tanggal' => $rekap->tanggal]);
+            // send email to parent of student
+            $this->sendMail($query->original[0]->detail->users->email_orangtua, $this->message->getMessage($query->original[0]));
+
             return response()->json($this->message->afterInsert());
         }
 
@@ -77,8 +87,8 @@
               ['kd_detil', '=', $id['kode']],
               ['tanggal', '=', urldecode($id['tanggal'])]
             ])->update(['kd_detil' => $data['kd_detil'],
-                        'hadir' => $data['hadir']]);
-            //tanggal is timestamp
+                        'hadir' => $data['hadir'],
+                        'tanggal' => Carbon::now()]);
 
             return response()->json($this->message->afterUpdate());
         }
@@ -103,6 +113,17 @@
             }
 
             return $arr;
+        }
+
+        // send email
+        public function sendMail($to, $body) {
+
+          Mail::raw($body, function($message) use($to) {
+            $message->from('gridcomputing100@gmail.com', 'Administrator');
+            $message->to($to, 'Absensi GPS')->subject('Status Kehadiran ' . Carbon::now());
+          });
+
+          return "Email Sent. Check your inbox.";
         }
     }
 
