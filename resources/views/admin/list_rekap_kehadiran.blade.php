@@ -52,7 +52,7 @@
                             <i class="fas fa-trash"></i>
                           </button>
                         </a>
-                        <a v-on:click="">
+                        <a v-on:click="_sendMail(urls[3], data)">
                           <button type="button" class="btn btn-success btn-circle">
                             <i class="fas fa-mail-bulk"></i>
                           </button>

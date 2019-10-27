@@ -18,6 +18,17 @@
       datas: {},
     },
     methods: {
+      _sendMail: function(req, dataReq) {
+        let email = dataReq.detail.users.email_orangtua;
+
+        axios.post('{{ url(env("prefix")) }}/' + req + "/send", {
+          'email': email,
+          'data': dataReq
+        }).then((response) => {
+          console.log(response.data)
+        })
+      },
+
       _deleteFunc: function(id, req) {
         let url = `/remove/${id}`
 

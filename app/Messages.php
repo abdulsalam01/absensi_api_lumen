@@ -31,12 +31,23 @@ class Messages
       return $status[$code];
   }
 
-  public function getMessage($data) {
+  public function getMessage($data, $code) {
+    if($code < 1) {
+      //
+      $message = "Selamat Siang
+      Berikut rekap kehadiran atas data:
+      NPM: " .$data->detail->users->npm. "
+      Nama: " .$data->detail->users->nama. "
+      Status Kehadiran: " .$data->hadir;
+
+      return $message;
+    }
+
     $message = "Selamat Siang
     Berikut rekap kehadiran atas data:
-    NPM: " .$data->detail->users->npm. "
-    Nama: " .$data->detail->users->nama. "
-    Status Kehadiran: " .$data->hadir;
+    NPM: " .$data['detail']['users']['npm']. "
+    Nama: " .$data['detail']['users']['nama']. "
+    Status Kehadiran: " .$data['hadir'];
 
     return $message;
   }

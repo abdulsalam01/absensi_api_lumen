@@ -75,6 +75,7 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
     $router->get('presence/{id}', 'RekapKehadiranController@getByUser');
     // post
     $router->post('create', 'RekapKehadiranController@insert');
+    $router->post('send', 'RekapKehadiranController@sendMail');
     // put
     $router->put('modify/{id}/{date}', 'RekapKehadiranController@update');
     // delete

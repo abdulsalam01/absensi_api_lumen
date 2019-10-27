@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Repositories\RekapKehadiranRepository;
 use Illuminate\Http\Request;
+use App\Messages;
 
 class RekapKehadiranController extends Controller
 {
@@ -18,6 +19,13 @@ class RekapKehadiranController extends Controller
     public function __construct(RekapKehadiranRepository $interface)
     {
         $this->rekap = $interface;
+    }
+
+    public function sendMail(Request $request) {
+        $message = new Messages();
+        $data = [$request->input('email'), $request->input('data')];
+        //
+        return $this->rekap->sendMail($data[0], $message->getMessage($data[1], 1));
     }
 
     public function counter() {

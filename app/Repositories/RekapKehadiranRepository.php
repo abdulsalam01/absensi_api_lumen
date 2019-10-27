@@ -36,7 +36,7 @@
             // get data detail of rekap by previous inserted data
             $query = $this->readById(['kode' => $rekap->kd_detil, 'tanggal' => $rekap->tanggal]);
             // send email to parent of student
-            $this->sendMail($query->original[0]->detail->users->email_orangtua, $this->message->getMessage($query->original[0]));
+            $this->sendMail($query->original[0]->detail->users->email_orangtua, $this->message->getMessage($query->original[0], 0));
 
             return response()->json($this->message->afterInsert());
         }
@@ -123,7 +123,7 @@
             $message->to($to, 'Absensi GPS')->subject('Status Kehadiran ' . Carbon::now());
           });
 
-          return "Email Sent. Check your inbox.";
+          return response()->json("Email Sent. Check your inbox.");
         }
     }
 
