@@ -5,8 +5,8 @@
     use App\Mahasiswa;
     // message helper
     use App\Messages;
-    // encrypt decrypt helper
-    use Illuminate\Support\Facades\Crypt;
+    // hash helper
+    use Illuminate\Support\Facades\Hash;
     use Illuminate\Contracts\Encryption\DecryptException;
 
     class UsersRepository implements GlobalInterface {
@@ -26,7 +26,9 @@
         public function login($data) {
             $mahasiswa = new Mahasiswa();
             //
-            $c = $mahasiswa->where(['npm' => $data['npm'], 'sandi' => $data['sandi']])->count();
+            $mahasiswa = $mahasiswa->find($data['npm']);
+            $c = Hash::check($data['sandi'], $mahasiswa->sandi);
+
             return response()->json($this->message->afterLogin($c));
         }
 
@@ -37,7 +39,7 @@
             $mahasiswa->nama = $data['nama'];
             $mahasiswa->alamat = $data['alamat'];
             $mahasiswa->tgllahir = $data['tgllahir'];
-            $mahasiswa->sandi = Crypt::encrypt($data['sandi']);
+            $mahasiswa->sandi = Hash::make($data['sandi']);
             $mahasiswa->email_orangtua = $data['email'];
 
             $mahasiswa->save();
@@ -61,17 +63,13 @@
             // find by id
             $mahasiswa = $mahasiswa->find($id);
 
-            // encrypt-decrypt password
-            try {
-              $password = Crypt::decrypt($data['sandi']);
-            } catch(DecryptException $e) {
-              $password = Crypt::encrypt($data['sandi']);
-            }
+            // encrypt password
+            $password = Hash::make($data['sandi']);
+            if(!empty($data['sandi'])) $mahasiswa->sandi = $password;
 
             $mahasiswa->nama = $data['nama'];
             $mahasiswa->alamat = $data['alamat'];
             $mahasiswa->tgllahir = $data['tgllahir'];
-            $mahasiswa->sandi = $password;
             $mahasiswa->email_orangtua = $data['email'];
 
             $mahasiswa->save();

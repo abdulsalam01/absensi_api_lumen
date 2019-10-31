@@ -17,7 +17,7 @@ class Messages
   }
 
   public function afterLogin($code) {
-    if($code > 0)
+    if($code)
       return array('message' => 'Login berhasil', 'status' => true);
 
     return array('message' => 'Login Gagal', 'status' => false);

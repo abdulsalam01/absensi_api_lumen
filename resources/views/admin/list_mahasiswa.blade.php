@@ -126,7 +126,7 @@
               <button type="button" class="btn btn-primary"
                       v-on:click="_updateFunc(result.npm, urls[0],
                               {'nama': result.nama, 'alamat': result.alamat, 'tgllahir': result.tgllahir,
-                              'sandi': result.sandi, 'email': result.email_orangtua})">Submit
+                              'email': result.email_orangtua})">Submit
               </button>
             </div>
           </div>
