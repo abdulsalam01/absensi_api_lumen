@@ -21,11 +21,13 @@
       _sendMail: function(req, dataReq) {
         let email = dataReq.detail.users.email_orangtua;
 
-        axios.post('{{ url(env("prefix")) }}/' + req + "/sendTemplate", {
+        axios.post('{{ url(env("prefix")) }}/' + req + "/sendView", {
           'email': email,
           'data': dataReq
         }).then((response) => {
           console.log(response.data)
+        }).catch((error) => {
+          console.log(error)
         })
       },
 

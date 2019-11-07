@@ -29,9 +29,9 @@ class RekapKehadiranController extends Controller
     }
 
     // email with template
-    public function sendMailWithTemplate(Request $request) {
+    public function sendMailWithView(Request $request) {
         $data = [$request->input('email'), $request->input('data')];
-
+        //
         return $this->rekap->sendMailWithTemplate($data[0], $data[1]);
     }
 

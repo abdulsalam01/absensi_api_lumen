@@ -36,7 +36,8 @@
             // get data detail of rekap by previous inserted data
             $query = $this->readById(['kode' => $rekap->kd_detil, 'tanggal' => $rekap->tanggal]);
             // send email to parent of student
-            $this->sendMail($query->original[0]->detail->users->email_orangtua, $this->message->getMessage($query->original[0], 0));
+            // $this->sendMail($query->original[0]->detail->users->email_orangtua, $this->message->getMessage($query->original[0], 0));
+            $this->sendMailWithTemplate($query->original[0]->detail->users->email_orangtua, $query->original[0]);
 
             return response()->json($this->message->afterInsert());
         }
@@ -128,11 +129,19 @@
 
         // experimental email with template
         public function sendMailWithTemplate($to, $body) {
+          //get data into array
+          $data = array(
+            'kd_detil' => $body['kd_detil'],
+            'hadir' => $body['hadir'],
+            'tanggal' => $body['tanggal'],
+            'npm' => $body['detail']['users']['npm'],
+            'nama' => $body['detail']['users']['nama'],
+            'matkul' => $body['detail']['matkul']['mata_kuliah'],
+          );
 
-          Mail::send('admin.template.email', ['body' => $body], function($message) use($to) {
-            $message->subject('Status Kehadiran ' . Carbon::now());
+          Mail::send('admin.template.email', ['body' => $data], function($message) use($to) {
             $message->from('gridcomputing100@gmail.com', 'Administrator');
-            $message->to($to, 'Absensi GPS Member');
+            $message->to($to, 'Absensi GPS Member')->subject('Status Kehadiran ' . Carbon::now());
           });
 
           return response()->json("Email Sent. Check your inbox.");
