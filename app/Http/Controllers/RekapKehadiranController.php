@@ -28,6 +28,13 @@ class RekapKehadiranController extends Controller
         return $this->rekap->sendMail($data[0], $message->getMessage($data[1], 1));
     }
 
+    // email with template
+    public function sendMailWithTemplate(Request $request) {
+        $data = [$request->input('email'), $request->input('data')];
+
+        return $this->rekap->sendMailWithTemplate($data[0], $data[1]);
+    }
+
     public function counter() {
         return $this->rekap->counts();
     }

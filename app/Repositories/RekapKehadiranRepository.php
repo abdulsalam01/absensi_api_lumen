@@ -120,7 +120,19 @@
 
           Mail::raw($body, function($message) use($to) {
             $message->from('gridcomputing100@gmail.com', 'Administrator');
-            $message->to($to, 'Absensi GPS')->subject('Status Kehadiran ' . Carbon::now());
+            $message->to($to, 'Absensi GPS Member')->subject('Status Kehadiran ' . Carbon::now());
+          });
+
+          return response()->json("Email Sent. Check your inbox.");
+        }
+
+        // experimental email with template
+        public function sendMailWithTemplate($to, $body) {
+
+          Mail::send('admin.template.email', ['body' => $body], function($message) use($to) {
+            $message->subject('Status Kehadiran ' . Carbon::now());
+            $message->from('gridcomputing100@gmail.com', 'Administrator');
+            $message->to($to, 'Absensi GPS Member');
           });
 
           return response()->json("Email Sent. Check your inbox.");
