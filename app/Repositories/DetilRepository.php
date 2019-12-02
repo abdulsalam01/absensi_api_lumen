@@ -61,7 +61,9 @@
             $detil = new JadwalDetil();
             $queryAll = $detil::with('users')->with('matkul')
                 ->where('npm', $id)
-                ->where('hari', $this->today())->get();
+                ->where('hari', $this->today())
+                ->orderBy('jam')
+                ->get();
 
             return response()->json($queryAll);
         }

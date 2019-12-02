@@ -27,7 +27,10 @@
             $mahasiswa = new Mahasiswa();
             //
             $mahasiswa = $mahasiswa->find($data['npm']);
-            $c = Hash::check($data['sandi'], $mahasiswa->sandi);
+
+            $c = false;
+            if(!empty($mahasiswa->npm))
+            	$c = Hash::check($data['sandi'], $mahasiswa->sandi);
 
             return response()->json($this->message->afterLogin($c));
         }
