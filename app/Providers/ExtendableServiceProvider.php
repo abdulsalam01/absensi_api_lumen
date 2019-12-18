@@ -29,5 +29,10 @@ class ExtendableServiceProvider extends ServiceProvider
         $this->app->when('App\Http\RekapKehadiranController')
                 ->needs('App\Interfaces\GlobalInterface')
                 ->give('App\Repositories\RekapKehadiranRepository');
+
+        //LOGIN REPOSITORY
+        $this->app->when('App\Http\AuthController')
+                ->needs('App\Interfaces\LoginInterface')
+                ->give('App\Repositories\LoginRepository');
     }
 }
