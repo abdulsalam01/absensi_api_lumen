@@ -18,13 +18,13 @@
                   </div>
 
                   <!-- login form -->
-                  <form class="user" method="post" action="{{url('admin/login/action')}}">
+                  <form class="user" method="post">
                     <div class="form-group">
-                      <input type="email" class="form-control form-control-user" name="email" aria-describedby="emailHelp" placeholder="Enter Email Address...">
+                      <input type="email" class="form-control form-control-user" name="email" v-model="result.email" placeholder="Enter Email Address...">
                     </div>
 
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" name="password" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" name="password" v-model="result.password" placeholder="Password">
                     </div>
 
                     <div class="form-group">
@@ -34,7 +34,7 @@
                       </div>
                     </div>
                     <!-- login button -->
-                    <input type="submit" class="btn btn-primary btn-user btn-block" value="Login"/>
+                    <input type="button" class="btn btn-primary btn-user btn-block" value="Login" v-on:click="_doAuth(result.email, result.password)"/>
                     <!-- end login -->
                   </form>
 

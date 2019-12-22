@@ -3,7 +3,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{url('admin')}}">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center collapse-item" data-url="{{url('admin')}}" href="#">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-laugh-wink"></i>
     </div>
@@ -15,7 +15,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-    <a class="nav-link" href="{{ url('/admin') }}">
+    <a class="nav-link collapse-item" data-url="{{ url('/admin') }}" href="#">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
   </li>
@@ -37,8 +37,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
-        <a class="collapse-item" href="{{ route('mhs') }}">Manipulasi</a>
-        <a class="collapse-item" href="{{ route('mhs_c') }}">Tambah</a>
+        <a class="collapse-item" data-url="{{ route('mhs') }}" href="#">Manipulasi</a>
+        <a class="collapse-item" data-url="{{ route('mhs_c') }}" href="#">Tambah</a>
       </div>
     </div>
   </li>
@@ -52,8 +52,8 @@
     <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
-        <a class="collapse-item" href="{{ route('mk') }}">Manipulasi</a>
-        <a class="collapse-item" href="{{ route('mk_c') }}">Tambah</a>
+        <a class="collapse-item" data-url="{{ route('mk') }}" href="#">Manipulasi</a>
+        <a class="collapse-item" data-url="{{ route('mk_c') }}" href="#">Tambah</a>
       </div>
     </div>
   </li>
@@ -75,8 +75,8 @@
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
-        <a class="collapse-item" href="{{ route('detil') }}">Manipulasi</a>
-        <a class="collapse-item" href="{{ route('detil_c') }}">Tambah</a>
+        <a class="collapse-item" data-url="{{ route('detil') }}" href="#">Manipulasi</a>
+        <a class="collapse-item" data-url="{{ route('detil_c') }}" href="#">Tambah</a>
       </div>
     </div>
   </li>
@@ -90,8 +90,8 @@
     <div id="collapsePagesX" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Event:</h6>
-        <a class="collapse-item" href="{{ route('rekap') }}">Manipulasi</a>
-        <a class="collapse-item" href="{{ route('rekap_c') }}">Tambah</a>
+        <a class="collapse-item" data-url="{{ route('rekap') }}" href="#">Manipulasi</a>
+        <a class="collapse-item" data-url="{{ route('rekap_c') }}" href="#">Tambah</a>
       </div>
     </div>
   </li>

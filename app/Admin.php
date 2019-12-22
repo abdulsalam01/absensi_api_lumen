@@ -20,7 +20,5 @@
     protected $fillable = [
         'email', 'password', 'token'
     ];
-
-    protected $hidden = ['password',];
   }
 ?>

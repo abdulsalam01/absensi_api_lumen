@@ -5,7 +5,7 @@
   <div id="wrapper">
 
     @include('admin.partials.menu')
-    
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 

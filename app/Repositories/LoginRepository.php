@@ -29,7 +29,7 @@
         $out = [
           "message" => "login failed",
           "code"    => 401,
-          "result"  => [ "token" => null]
+          "result"  => ["token" => null]
         ];
 
         //return failed
@@ -44,19 +44,16 @@
         $admin->update(['token' => $token]);
 
         $out = [
-          "message" => "loign success",
+          "message" => "login success",
           "code"    => 200,
           "result"  => [ "token" => $token, ]
         ];
 
         //return success
-        //return response()->json($out, $out['code']);
-
-        //set session of $token
-        //session(['token' => $token]);
+        return response()->json($out, $out['code']);
 
         //redirect page
-        return redirect('/admin?token=' . $token);
+        // return redirect('/admin?token=' . $token);
       }
 
       //if password failed

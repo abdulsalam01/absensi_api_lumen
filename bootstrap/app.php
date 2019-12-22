@@ -57,9 +57,9 @@ $app->singleton(
 |
 */
 
-// $app->middleware([
-//     App\Http\Middleware\ExampleMiddleware::class
-// ]);
+/* ENABLE SESSION */
+//$app->middleware();
+/* END ENABLE SESSION */
 
 $app->routeMiddleware([
     'login' => App\Http\Middleware\LoginMiddleware::class,

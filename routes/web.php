@@ -86,13 +86,15 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
 
 
 // WEB ROUTE
-$router->group(['prefix' => 'admin'], function() use($router) {
+$router->group(['prefix' => 'auth'], function() use($router) {
   // GET ACTION LOGIN - LOGOUT
   $router->get('/login', 'AuthController@loginPage');
   $router->get('/logout', 'AuthController@_doLogout');
   // POST ACTION LOGIN - LOGOUT
   $router->post('/login/action/', 'AuthController@_doLogin');
+});
 
+$router->group(['prefix' => 'admin', 'middleware' => ['login',]], function() use($router) {
   //
   $router->get('/', 'AdminController@index');
   //

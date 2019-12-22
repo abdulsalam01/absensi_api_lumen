@@ -16,6 +16,8 @@
       status: [],
       // keep value of inserted data
       datas: {},
+      //get token from login
+      token: [, '?token='],
     },
     methods: {
       _sendMail: function(req, dataReq) {
@@ -38,7 +40,10 @@
         if(Array.isArray(id)) url = `/remove/${id[0]}/${id[1]}`
 
         axios.delete('{{ url(env("prefix")) }}/' + req + url).then((response) => {
-          window.location.href = '{{ url(app("request")->segment(1)) }}/' + req + '{{"/all"}}'
+          this.token[0] = sessionStorage.getItem('token');
+          //
+          window.location.href = '{{ url(app("request")->segment(1)) }}/' + req + '{{"/all"}}' +
+                                    this.token[1] + this.token[0]
         })
       },
 
@@ -49,13 +54,19 @@
         if(Array.isArray(id)) url = `/modify/${id[0]}/${id[1]}`
 
         axios.put('{{ url(env("prefix")) }}/' + req + url, model).then((response) => {
-          window.location.href = '{{ url(app("request")->segment(1)) }}/' + req + '{{"/all"}}'
+          this.token[0] = sessionStorage.getItem('token');
+          //
+          window.location.href = '{{ url(app("request")->segment(1)) }}/' + req + '{{"/all"}}' +
+                                    this.token[1] + this.token[0]
         })
       },
 
       _insertFunc: function(req, data) {
         axios.post('{{ url(env("prefix")) }}/' + req + '/create', data).then((response) => {
-          window.location.href = '{{ url(app("request")->segment(1)) }}/' + req + '{{"/all"}}'
+          this.token[0] = sessionStorage.getItem('token');
+          //
+          window.location.href = '{{ url(app("request")->segment(1)) }}/' + req + '{{"/all"}}' +
+                                    this.token[1] + this.token[0]
         })
       },
 
@@ -64,7 +75,36 @@
         $(`#${code}`).modal()
         //
         this.result = this.all_data[idx][id];
-      }
+      },
+
+      _doAuth: function(username, password) {
+        //grab user's input
+        let data = {
+          'email': username,
+          'password': password,
+        }
+
+        axios.post('{{ url("auth/login/action") }}', data).then((response) => {
+          let code = response.data.result.token;
+
+          //set to state variable token
+          this.token[0] = code;
+          //set to session
+          sessionStorage.setItem('token', this.token[0]);
+          //
+          //change page with token
+          window.location.href = `{{ url("admin?token=") }}${this.token[0]}`
+        }).catch((err) => {
+          console.log(err)
+        })
+      },
+
+      _doLogout: function() {
+        //clear session
+        sessionStorage.removeItem('token')
+        //change page
+        window.location.href = "{{ url('auth/logout/')}}"
+      },
     },
     mounted () {
       //store status from model to status
@@ -83,5 +123,16 @@
       }
       // end for
     }
+  })
+
+  //jQuery
+  //route navigation
+  $('.collapse-item').on('click', function(e) {
+    //get menu
+    let menu = $(this).data('url')
+    //tokenize
+    let token = sessionStorage.getItem('token')
+    //
+    window.location.href = menu + app.token[1] + token;
   })
 </script>
