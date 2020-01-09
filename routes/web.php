@@ -51,7 +51,7 @@ $router->group(['prefix' => env('prefix')], function() use ($router) {
   // detil_jadwal api
   $router->group(['prefix' => 'detil_jadwal'], function() use ($router) {
     // get
-    $router->get('/count', 'MataKuliahController@counter');
+    $router->get('/count', 'DetilJadwalController@counter');
     //
     $router->get('all', 'DetilJadwalController@getAll');
     $router->get('all/{id}', 'DetilJadwalController@getById');

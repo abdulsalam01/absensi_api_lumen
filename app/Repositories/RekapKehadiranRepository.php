@@ -140,7 +140,7 @@
           );
 
           Mail::send('admin.template.email', ['body' => $data], function($message) use($to) {
-            $message->from('gridcomputing100@gmail.com', 'Administrator');
+            $message->from('gerobakapp@gmail.com', 'Administrator');
             $message->to($to, 'Absensi GPS Member')->subject('Status Kehadiran ' . Carbon::now());
           });
 

@@ -110,7 +110,7 @@
             </div>
             <div class="card-footer"></div>
           </div>
-          
+
       </div> <!-- end of content -->
 
     </div>

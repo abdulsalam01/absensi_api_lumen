@@ -30,7 +30,7 @@
                   <div class="form-group row">
                     <label for="matkul" class="col-sm-2 col-form-label">Mata Kuliah:</label>
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" placeholder="Statistik" v-model="datas.mata_kuliah"/>
+                      <input type="text" class="form-control" placeholder="Mata Kuliah..." v-model="datas.mata_kuliah"/>
                     </div>
                   </div>
 
